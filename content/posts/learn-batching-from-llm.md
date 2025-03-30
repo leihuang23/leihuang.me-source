@@ -6,7 +6,7 @@ tags: ['batching', 'LLM']
 showToc: false
 ---
 
-I was reviewing my old notebook and came across a piece of code that I took from somewhere many years ago. I asked Claude 3.7 Sonnet about this code, and here's the conversation:
+III was reviewing my old notebook and came across a piece of code that I took from somewhere many years ago. I asked Claude 3.7 Sonnet about this code, and here's the conversation:
 
 {{<user>}}
 Take a look at the following code:
