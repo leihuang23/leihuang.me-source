@@ -11,12 +11,13 @@ commit:
 	fi; \
 	echo "Building site with Hugo..."; \
 	hugo; \
-	echo "Committing main repository with message: $$MSG"; \
+	cd public && \
+	echo "Committing public repository with message: $$MSG"; \
 	git add .; \
 	git commit -m "$$MSG"; \
 	git push origin; \
-	cd public && \
-	echo "Committing public repository with message: $$MSG"; \
+	cd .. && \
+	echo "Committing main repository with message: $$MSG"; \
 	git add .; \
 	git commit -m "$$MSG"; \
 	git push origin; \
