@@ -1,0 +1,66 @@
+{{- define "main" }}
+<main>
+  <svg viewBox="0 0 800 200" class="funky-404">
+    <text
+      x="50%"
+      y="50%"
+      text-anchor="middle"
+      dominant-baseline="middle"
+      class="funky-text"
+    >
+      404
+    </text>
+    <style>
+      .funky-404 {
+        width: 100%;
+        height: auto;
+        margin: 1rem 0;
+      }
+      .funky-text {
+        font-size: 140px;
+        font-weight: bold;
+        fill: transparent;
+        stroke: var(--color-link);
+        stroke-width: 4px;
+        animation: pulse 2s ease-in-out infinite;
+      }
+      @keyframes pulse {
+        50% {
+          stroke-width: 4px;
+          stroke-dasharray: 10;
+        }
+      }
+    </style>
+  </svg>
+  <p>I haven't written this article yet. Will you help me write it?</p>
+  <iframe
+    class="responsive-iframe"
+    style="aspect-ratio: 16/9"
+    width="100%"
+    src="https://www.youtube-nocookie.com/embed/6IJB0aD8gSA?si=KG0aGzmKo6CSd0Uy"
+    title="YouTube video player"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerpolicy="strict-origin-when-cross-origin"
+    allowfullscreen
+  ></iframe>
+  <p>
+    <a href="/">Go home.</a>
+  </p>
+</main>
+<style>
+  p {
+    line-height: 1.5rem;
+    margin: 1rem 0;
+  }
+
+  a {
+    color: var(--color-link);
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+</style>
+{{- end }}{{/* end main */ -}}
