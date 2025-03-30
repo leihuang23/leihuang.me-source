@@ -1,0 +1,6 @@
+{{ $name := .Get "name" | default "Lei" }}
+
+<div class="message user-message">
+  <div class="speaker-name">{{ $name }}</div>
+  <div class="message-content">{{ .Inner | markdownify }}</div>
+</div>
