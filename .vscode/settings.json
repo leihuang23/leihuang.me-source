@@ -1,0 +1,8 @@
+{
+  "editor.renderWhitespace": "all",
+  "editor.insertSpaces": false,
+  "[makefile]": {
+    "editor.insertSpaces": false,
+    "editor.detectIndentation": false
+  }
+}

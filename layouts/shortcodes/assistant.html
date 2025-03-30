@@ -1,6 +1,6 @@
 {{ $name := .Get "name" | default "Assistant" }}
 
 <div class="message assistant-message">
-  <div class="speaker-name">{{ $name }}</div>
+  <div class="speaker-name">{{ $name }}:</div>
   <div class="message-content">{{ .Inner | markdownify }}</div>
 </div>
