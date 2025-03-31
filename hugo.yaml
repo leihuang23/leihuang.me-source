@@ -87,9 +87,9 @@ params:
     Content: >
       - is a software engineer based in Berlin.
 
-      - He loves to write code, run, and wander in the mountains.
-      
-      - He writes corporate JavaScript at work, but his heart belongs to Clojure.
+      - He loves to write code, run, and wander in the wild.
+
+      - He speaks English, Chinese, und ein bisschen Deutsch.
 
   socialIcons:
     - name: github
