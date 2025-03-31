@@ -85,9 +85,9 @@ params:
   homeInfoParams:
     Title: "Lei Huang"
     Content: >
-      - I write JavaScript for work, and Clojure for fun.
-
-      - Speaks English, Mandarin and ein bisschen Deutsch.
+      - is a software engineer based in Berlin.
+      - He loves to write code, run, and wander in the mountains.
+      - He writes corporate JavaScript at work, but his heart belongs to Clojure.
 
   socialIcons:
     - name: github
