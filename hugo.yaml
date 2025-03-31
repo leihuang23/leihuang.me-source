@@ -85,13 +85,7 @@ params:
   homeInfoParams:
     Title: "Lei Huang"
     Content: >
-      - An ausländer lives in Berlin.
-      
-      - A Luddite works in tech.
-      
-      - A Chinese with socialist characteristics.
-
-      - Wanders mostly in the forests of Brandenburg.
+      - I write JavaScript for work, and Clojure for fun.
 
       - Speaks English, Mandarin and ein bisschen Deutsch.
 

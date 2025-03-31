@@ -1,0 +1,53 @@
+{:tasks
+ {;; Default parameters
+  :init {:task (do (def default-message "update content")
+                   (def public-dir "public")
+
+                   ;; ANSI color codes
+                   (def green "\u001B[32m")
+                   (def cyan "\u001B[36m")
+                   (def yellow "\u001B[33m")
+                   (def bold "\u001B[1m")
+                   (def reset "\u001B[0m")
+
+                   ;; Helper function for colored output
+                   (defn color-print [color text]
+                     (println (str color bold text reset))))}
+
+  ;; Start development server
+  dev {:doc "Start Hugo development server"
+       :task (do
+               (println (str cyan bold "Starting Hugo development server..." reset))
+               (shell "hugo server -D"))}
+
+  ;; Build the site with Hugo
+  build {:doc "Build the site with Hugo"
+         :task (do
+                 (println (str yellow bold "🔨 Building site with Hugo..." reset))
+                 (shell "hugo"))}
+
+  ;; Commit changes to public repository
+  commit-public {:doc "Commit changes to public repository"
+                 :task (let [msg (or (first *command-line-args*) default-message)]
+                         (run 'build)
+                         (shell {:dir public-dir}
+                                "echo" (str cyan bold "📦 Committing public repository with message: " msg reset))
+                         (shell {:dir public-dir} "git add .")
+                         (shell {:dir public-dir} "git commit -m" msg)
+                         (shell {:dir public-dir} "git push origin"))}
+
+  ;; Commit changes to main repository
+  commit-main {:doc "Commit changes to main repository"
+               :task (let [msg (or (first *command-line-args*) default-message)]
+                       (run 'commit-public msg)
+                       (println (str cyan bold "📦 Committing main repository with message: " msg reset))
+                       (shell "git add .")
+                       (shell "git commit -m" msg)
+                       (shell "git push origin"))}
+
+  ;; Build site, commit and push changes to both repositories
+  ;; Usage: bb commit "your commit message"
+  commit {:doc "Build site, commit and push changes to both repositories"
+          :task (let [msg (or (first *command-line-args*) default-message)]
+                  (run 'commit-main msg)
+                  (println (str green bold "✅ All changes committed and pushed successfully!" reset)))}}}
