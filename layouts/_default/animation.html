@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Fourier Transform Animation</title>
+    <style>
+      body {
+        margin: 0;
+        background: #222;
+      }
+      canvas {
+        display: block;
+        margin: 0 auto;
+        background: #111;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas" width="800" height="600"></canvas>
+    <script src="./data.js"></script>
+    <script>
+      const canvas = document.getElementById("canvas");
+      const ctx = canvas.getContext("2d");
+
+      const scaleFactor = 0.5;
+      const complexPoints = coordinates.map((pt) => ({
+        re: pt[0] * scaleFactor,
+        im: pt[1] * scaleFactor,
+      }));
+
+      // Discrete Fourier Transform (DFT)
+      function dft(x) {
+        const N = x.length;
+        const X = [];
+        for (let k = 0; k < N; k++) {
+          let re = 0,
+            im = 0;
+          for (let n = 0; n < N; n++) {
+            const phi = (2 * Math.PI * k * n) / N;
+            // Multiply by e^(-i*phi) = cos(phi) - i*sin(phi)
+            re += x[n].re * Math.cos(phi) + x[n].im * Math.sin(phi);
+            im += -x[n].re * Math.sin(phi) + x[n].im * Math.cos(phi);
+          }
+          re /= N;
+          im /= N;
+          const freq = k;
+          const amp = Math.hypot(re, im);
+          const phase = Math.atan2(im, re);
+          X.push({ re, im, freq, amp, phase });
+        }
+        return X;
+      }
+
+      // Compute Fourier coefficients and sort by amplitude (largest first)
+      let fourier = dft(complexPoints);
+      fourier.sort((a, b) => b.amp - a.amp);
+
+      // Animation state variables
+      let time = 0;
+      const dt = (2 * Math.PI) / fourier.length;
+      let path = [];
+      const animationSpeed = 1; // Lower = slower, 1.0 = original speed
+      let lastFrameTime = 0;
+
+      // Function to draw the set of vectors and update the traced path
+      function draw(currentTime) {
+        // Control frame rate based on timing
+        if (lastFrameTime === 0) lastFrameTime = currentTime;
+        const elapsed = currentTime - lastFrameTime;
+
+        // Only update if enough time has passed (for slower animation)
+        if (elapsed > 1000 / 60 / animationSpeed) {
+          lastFrameTime = currentTime;
+          // Clear the canvas
+          ctx.fillStyle = "#111";
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+          // Move the origin to the center of the canvas
+          ctx.save();
+          ctx.translate(canvas.width / 2, canvas.height / 2);
+
+          let x = 0;
+          let y = 0;
+
+          // Draw each Fourier vector (each as a rotating circle and its arrow)
+          for (let i = 0; i < fourier.length; i++) {
+            let prevX = x;
+            let prevY = y;
+            const freq = fourier[i].freq;
+            const radius = fourier[i].amp;
+            const phase = fourier[i].phase;
+            x += radius * Math.cos(freq * time + phase);
+            y += radius * Math.sin(freq * time + phase);
+
+            // Draw the circle (vector path)
+            ctx.strokeStyle = "rgba(255, 255, 255, 0.3)";
+            ctx.beginPath();
+            ctx.arc(prevX, prevY, radius, 0, 2 * Math.PI);
+            ctx.stroke();
+
+            // Draw the vector line
+            ctx.strokeStyle = "#fff";
+            ctx.beginPath();
+            ctx.moveTo(prevX, prevY);
+            ctx.lineTo(x, y);
+            ctx.stroke();
+          }
+
+          // Add the final tip to the path
+          path.unshift({ x, y });
+          // Optional: Limit path length for performance
+          //   if (path.length > 500) {
+          //     path.pop();
+          //   }
+
+          // Draw the traced path
+          ctx.beginPath();
+          ctx.moveTo(path[0].x, path[0].y);
+          for (let i = 1; i < path.length; i++) {
+            ctx.lineTo(path[i].x, path[i].y);
+          }
+          ctx.strokeStyle = "#ff4081";
+          ctx.lineWidth = 2;
+          ctx.stroke();
+
+          ctx.restore();
+
+          // Increment time and loop if needed
+          time += dt;
+          if (time > 2 * Math.PI) {
+            time = 0;
+            path = [];
+          }
+        }
+        requestAnimationFrame(draw);
+      }
+
+      // Start the animation
+      requestAnimationFrame(draw);
+    </script>
+  </body>
+</html>
