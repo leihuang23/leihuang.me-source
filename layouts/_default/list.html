@@ -592,12 +592,21 @@ $paginator := .Paginate $pages }} {{- if and .IsHome site.Params.homeInfoParams
   ];
   class List {
     static create(initialCapacity = 16) {
-      return new List(initialCapacity);
+      const list = new List(initialCapacity);
+      return new Proxy(list, {
+        get(target, prop) {
+          if (typeof prop === "string" && /^\d+$/.test(prop)) {
+            return target.get(parseInt(prop));
+          }
+          return target[prop];
+        },
+      });
     }
+
     constructor(initialCapacity = 16) {
       this.initialCapacity = initialCapacity;
       this._capacity = initialCapacity;
-      this._buffer = new Array(initialCapacity);
+      this._buffer = new Array(initialCapacity).fill(null);
       this._head = Math.floor(initialCapacity / 2); // Start in the middle
       this._tail = this._head - 1;
       this.length = 0;
@@ -623,6 +632,15 @@ $paginator := .Paginate $pages }} {{- if and .IsHome site.Params.homeInfoParams
       if (this._tail === this._capacity - 1) this._resize();
       this._buffer[++this._tail] = item;
       return ++this.length;
+    }
+
+    pop() {
+      if (this.length === 0) return undefined;
+      const item = this._buffer[this._tail];
+      this._buffer[this._tail] = null;
+      this._tail--;
+      this.length--;
+      return item;
     }
 
     /**
@@ -653,7 +671,7 @@ $paginator := .Paginate $pages }} {{- if and .IsHome site.Params.homeInfoParams
     clear() {
       const initialCapacity = this.initialCapacity;
       this._capacity = initialCapacity;
-      this._buffer = new Array(initialCapacity);
+      this._buffer = new Array(initialCapacity).fill(null);
       this._head = Math.floor(initialCapacity / 2);
       this._tail = this._head - 1;
       this.length = 0;
@@ -665,7 +683,7 @@ $paginator := .Paginate $pages }} {{- if and .IsHome site.Params.homeInfoParams
      */
     _resize() {
       const newCapacity = this._capacity * 2;
-      const newBuffer = new Array(newCapacity);
+      const newBuffer = new Array(newCapacity).fill(null);
       const newHead = Math.floor((newCapacity - this.length) / 2);
 
       // Copy elements to the new buffer
@@ -677,6 +695,35 @@ $paginator := .Paginate $pages }} {{- if and .IsHome site.Params.homeInfoParams
       this._head = newHead;
       this._tail = this._head + this.length - 1;
       this._capacity = newCapacity;
+    }
+
+    [Symbol.iterator]() {
+      let index = 0;
+      const list = this;
+
+      return {
+        next() {
+          if (index < list.length) {
+            return { value: list.get(index++), done: false };
+          } else {
+            return { done: true };
+          }
+        },
+      };
+    }
+
+    forEach(callback) {
+      for (let i = 0; i < this.length; i++) {
+        callback(this.get(i), i);
+      }
+    }
+
+    map(callback) {
+      const result = List.create(this.length);
+      for (let i = 0; i < this.length; i++) {
+        result.append(callback(this.get(i), i));
+      }
+      return result;
     }
   }
   // Calculate bounds of the original coordinates
@@ -861,9 +908,9 @@ $paginator := .Paginate $pages }} {{- if and .IsHome site.Params.homeInfoParams
       ctx.beginPath();
       if (path.length > 0) {
         // Check if path has points
-        ctx.moveTo(path.get(0).x, path.get(0).y);
+        ctx.moveTo(path[0].x, path[0].y);
         for (let i = 1; i < path.length; i++) {
-          ctx.lineTo(path.get(i).x, path.get(i).y);
+          ctx.lineTo(path[i].x, path[i].y);
         }
         ctx.strokeStyle = "#ff4081"; // Pink color
         ctx.lineWidth = (baseLineWidth * 2) / scale; // Make path slightly thicker
