@@ -843,10 +843,7 @@ $paginator := .Paginate $pages }} {{- if and .IsHome site.Params.homeInfoParams
     // const containerPadding = 28; // Match your CSS padding * 2 or desired spacing
     const newWidth = canvasContainer.clientWidth;
 
-    // Calculate height (example: maintain a 16:9 ratio, or use fixed height)
-    // const newHeight = newWidth * (9 / 16);
-    // Or use a portion of the window height:
-    const newHeight = newWidth * (2 / 3);
+    const newHeight = Math.min(newWidth * (2 / 3), window.innerHeight);
 
     // Set the CSS size for the element's layout
     canvas.style.width = newWidth + "px";
