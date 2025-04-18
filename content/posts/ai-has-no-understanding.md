@@ -163,7 +163,7 @@ LLMs behave like some tech bros and crypto bros — always 100% sure and convinc
 
 I sometimes fall for their confidence and overestimate their abilities.
 
-My handwriting isn't great, so I thought AI could improve it. After collecting my handwritten coordinates, I asked Gemini 2.5 Pro for improvement.
+My handwriting isn't great, so I thought AI could improve it. After collecting my handwriting coordinates, I asked Gemini 2.5 Pro for improvement.
 
 {{<user>}}
 I have a coordinates path that represents a one-stroke path of the text "Hello". My handwriting is ugly and I want you to improve it. Give me a more stylish one-stroke path. Here's the js array for my current path:
@@ -179,7 +179,7 @@ Okay, I can help you with that! Creating a "stylish" path is subjective, but I c
 (Blah blah enthusiastic and self-assured rubbish)
 {{</assistant>}}
 
-Of course, Gemini couldn't help — the coordinates I provided never appeared online and pattern-matching was doomed to fail. Unless Gemini wrote a dedicated program to deterministically improve my handwriting, there was no way it could help me. Yet, Gemini confidently provided rubbish coordinates.
+Of course, Gemini couldn't help — the coordinates I provided never appeared on the internet and pattern-matching was doomed to fail. Unless Gemini wrote a dedicated program to deterministically improve my handwriting, there was no way it could help me. Yet, Gemini confidently provided rubbish coordinates.
 
 We continued until I realized I'd asked a dumb question.
 
