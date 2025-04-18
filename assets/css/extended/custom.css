@@ -48,9 +48,9 @@
 }
 
 .dark .message {
-   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-   border: 1px solid rgba(255, 255, 255, 0.1);
-
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .speaker-name {
@@ -62,19 +62,19 @@
 }
 
 .user-message .speaker-name {
-  color: #FF7043;
+  color: #ff7043;
 }
 
 .dark .user-message .speaker-name {
-  color: #FFD54F;
+  color: #ffd54f;
 }
 
 .assistant-message .speaker-name {
-  color: #6200EA;
+  color: #6200ea;
 }
 
 .dark .assistant-message .speaker-name {
-  color: #BB86FC;
+  color: #bb86fc;
 }
 
 .user-message {
@@ -105,4 +105,9 @@
 
 .message p:last-child {
   margin-bottom: 0;
+}
+
+.post-content img {
+  display: block;
+  margin: 1rem auto;
 }
