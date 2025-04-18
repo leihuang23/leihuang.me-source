@@ -76,11 +76,11 @@ The Kakashi app collects users' drawing paths as coordinates and animates them u
 Here's a conversation between me and Claude 3.7 with extended "thinking":
 
 {{<user>}}
-I want to build a web app to extract coordinate points from images so that I can animate the coordinated later. Here are the ideas:
+I want to build a web app to extract coordinate points from images so that I can animate the coordinates later. Here are the ideas:
 
 1. We can assume the images will only contain one-stroke drawing. Our goal is to extract this one-stroke drawing.
-2. The image will not be guaranteed to be with perfect white background. We'll need to deal with noises. We can start with extracting the main path. We need to get rid of any rogue elements/pixels on the image. We only care about the single longest stroke on the image. We also need to handle potential breaks of the path. If there are breaks, we need to fill them.
-3. Then we make the path a single-pixel smooth line. Be careful not to make the path wiggly.
+2. The image will not be guaranteed to have perfect white background. We'll need to deal with noise. We can start with getting rid of any rogue elements/pixels on the image and then extracting the main path. We also need to handle potential breaks of the path. If there are breaks, we need to fill them.
+3. Then we make the path a one pixel wide smooth line. Be careful not to make the path wiggly.
 4. Find the start and end point of the stroke.
 5. We need to sample the path points as if we are drawing. I don't have a good idea on how long the draw should be, as the drawings can have different complexities. Make the default draw duration 4 seconds, but make it a variable that the user can provide through the UI. The idea is that we sample the points within the browser animation rate limit. So the frequency should be one pixel per duration_in_ms/16.67. We also need to mimic human drawing gesture. Faster in straight parts, slower in curvy parts.
 6. When deciding the start and end point, follow the rule that start from left, end on the right.
