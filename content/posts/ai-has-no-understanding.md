@@ -9,7 +9,7 @@ The proliferation of AI (specifically LLMs) has been the major development in ou
 
 I've been using LLMs at work for quite a while. Although it's not rare for me to use them to generate code beyond my expertise, I remain convinced that current LLMs lack genuine cognitive capabilities. The notion of fully delegating human tasks to AI systems remains unrealistic today. I doubt whether it will ever be truly possible.
 
-## It has no expertise
+## 1. It has no expertise
 
 Let me start with a very recent example. GPT-4.1 was out this week. Here's what OpenAI says about it:
 
