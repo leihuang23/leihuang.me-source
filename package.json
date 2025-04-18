@@ -1,0 +1,26 @@
+{
+  "name": "leihuang.me",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+	"dev": "vite build --watch --mode development --sourcemap",
+    "build": "vite build",
+    "start": "npm run build && hugo server",
+    "preview": "npm run build && hugo server -D"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leihuang23/leihuang.me-source.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/leihuang23/leihuang.me-source/issues"
+  },
+  "homepage": "https://github.com/leihuang23/leihuang.me-source#readme",
+  "description": "",
+  "devDependencies": {
+    "vite": "^6.3.2"
+  }
+}

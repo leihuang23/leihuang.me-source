@@ -18,13 +18,15 @@
   dev {:doc "Start Hugo development server"
        :task (do
                (println (str cyan bold "Starting Hugo development server..." reset))
-               (shell "hugo server -D"))}
+               (future (shell "npm run dev"))
+               (shell "hugo server -D --minify -O"))}
 
   ;; Build the site with Hugo
   build {:doc "Build the site with Hugo"
          :task (do
                  (println (str yellow bold "🔨 Building site with Hugo..." reset))
-                 (shell "hugo"))}
+                 (shell "npm run build")
+                 (shell "hugo --minify"))}
 
   ;; Commit changes to public repository
   commit-public {:doc "Commit changes to public repository"
