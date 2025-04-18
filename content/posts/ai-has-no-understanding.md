@@ -62,9 +62,9 @@ This conversation reveals a lot about the nature of LLMs.
 
 Fundamentally, what LLMs do is generate the right words at the right time. They do this by sampling texts from the internet and placing every token into hyperspace (represented by vectors). When you have conversations with LLMs, they try to complete a "user - system" conversation with statistically probable text.
 
-In the conversation above, GPT gave the initial answer probably because it saw such an answer during training. It failed to discriminate bad solutions from good ones.
+In the conversation above, GPT gave the initial answer probably because it saw such an answer during training.(It's also possible the LLM was "thinking", i.e. generating its working memory, with bad content) It failed to discriminate bad solutions from good ones.
 
-Why did GPT initially propose an inferior solution? Because it selects the statistically likely next words based on training data, without genuine expertise or intuition. As a human developer, the mere sight of `window.location.hostname` immediately signals poor practice. GPT, despite extensive data exposure, lacked the judgment to initially recommend the better solution.
+Why did GPT initially propose an inferior solution? Because it selects the statistically likely next words based on training data, without genuine expertise or intuition. As a human developer, I can immediately capture the signal of poor practice at the mere sight of `window.location.hostname`. GPT, despite extensive data exposure, lacked the judgment to initially recommend the better solution.
 
 ## 2. It doesn't know what is impossible
 
@@ -100,6 +100,21 @@ Blah blah...
 
 Claude confidently gave a non-solution. It didn't work, of course. We went back and forth several rounds until I realized something was wrong.
 
+{{<user>}}
+It still doesn't work. I think you are trying in the wrong direction. The issue is the thin algorithm displaced the joint, but you were trying to fix the tracing.
+{{</user>}}
+
+{{<assistant name="Claude 3.7">}}
+I understand the problem now - you're absolutely right. The issue is with the thinning algorithm, not the path tracing. The skeletonization process is breaking connectivity at the intersections/joints.
+Let me fix the actual problem:
+
+...
+
+Blah blah
+{{</assistant>}}
+
+Broken code, again.
+
 Suddenly, I had a Eureka moment and felt smart:
 
 {{<user>}}
@@ -114,7 +129,7 @@ You've hit the nail on the head! Following the actual drawing path rather than r
 ...
 {{</assistant>}}
 
-And of course, wrong code again. We continued several rounds until I started to worry about my usage limit. Then, I started a new conversation and changed the question:
+And of course, broken code again. We continued several rounds until I started to worry about my usage limit. Then, I started a new conversation and changed the question:
 
 {{<user>}}
 You are not solving the problem. I've already told you the thin algorithm handles the cross wrong. The line crosses and enters itself at one point, but exits from another point. I've added the screenshot.
@@ -164,8 +179,8 @@ Okay, I can help you with that! Creating a "stylish" path is subjective, but I c
 (Blah blah enthusiastic and self-assured rubbish)
 {{</assistant>}}
 
-Of course, Gemini couldn't help — the coordinates I provided never appeared online and pattern-matching is doomed to fail. Unless Gemini wrote a dedicated program to deterministically improve my handwriting, there was no way it could help me. Yet, Gemini confidently provided rubbish coordinates.
+Of course, Gemini couldn't help — the coordinates I provided never appeared online and pattern-matching was doomed to fail. Unless Gemini wrote a dedicated program to deterministically improve my handwriting, there was no way it could help me. Yet, Gemini confidently provided rubbish coordinates.
 
 We continued until I realized I'd asked a dumb question.
 
-A human expert would quickly identify a bad question and help directing you ask the right one. But LLM isn't capable of that. It'll always mimic a conversation, even when it's clearly out of its depth.
+A human expert would quickly identify a bad question and help directing you to ask the right one. But LLM isn't capable of that. It'll always mimic a conversation, even when it's clearly out of its depth.
