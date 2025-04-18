@@ -60,7 +60,7 @@ if (import.meta.env.DEV) {
 
 This conversation reveals a lot about the nature of LLMs.
 
-Fundamentally, what LLMs do is generate the right words at the right time. They do this by sampling texts from the internet and placing every token into hyperspace (represented by vectors). When you have conversations with LLMs, they try to complete a "user - system" conversation with statistically probable text.
+Fundamentally, what LLMs do is generate the right words at the right time. They do this by sampling texts from the internet and placing every token into a hyperspace (represented by vectors). When you interact with an LLM, it treats your input as context, navigating this hyperspace to predict and generate text that best completes or continues the "user–system" conversation.
 
 In the conversation above, GPT gave the initial answer probably because it saw such an answer during training.(It's also possible the LLM was "thinking", i.e. generating its working memory, with bad content) It failed to discriminate bad solutions from good ones.
 
